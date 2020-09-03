@@ -21,7 +21,8 @@ public class ProductDaoImpl implements ProductDao {
     public Optional<Product> get(Long productId) {
         return Storage.products.stream()
                 .filter(p -> p.getId().equals(productId))
-                .findAny();
+                .map(Product::clone)
+                .findFirst();
     }
 
     @Override
@@ -29,18 +30,13 @@ public class ProductDaoImpl implements ProductDao {
         return IntStream.range(0, Storage.products.size())
                 .filter(i -> Storage.products.get(i).getId().equals(product.getId()))
                 .mapToObj(i -> Storage.products.set(i, product))
-                .findAny()
-                .orElse(null);
+                .findFirst()
+                .orElseThrow();
     }
 
     @Override
     public boolean delete(Long productId) {
-        Optional<Product> toDelete = get(productId);
-        if (toDelete.isPresent()) {
-            Storage.removeProduct(toDelete.get());
-            return true;
-        }
-        return false;
+        return Storage.products.removeIf(p -> p.getId().equals(productId));
     }
 
     @Override

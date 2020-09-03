@@ -3,10 +3,12 @@ package com.internet.shop;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
-import java.math.BigDecimal;
 
 public class Application {
     private static Injector injector = Injector.getInstance("com.internet.shop");
+    private static final double NEW_PRICE = 1500;
+    private static final long PRESENT_PRODUCT = 4L;
+    private static final long ABSENT_PRODUCT = 7L;
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
@@ -26,11 +28,14 @@ public class Application {
         Product gpu = new Product("GeForce RTX 2080Ti", 1150);
         productService.create(gpu);
         Product gpuToUpdate = gpu.clone();
-        gpuToUpdate.setPrice(BigDecimal.valueOf(1500));
-        productService.update(gpuToUpdate);
+        gpuToUpdate.setPrice(NEW_PRICE);
+        System.out.println(productService.update(gpuToUpdate));
         System.out.println(productService.getAll());
 
-        System.out.println(productService.get((long) 4));
-        System.out.println(productService.get((long) 7));
+        Product searchedProduct = productService.get(PRESENT_PRODUCT);
+        searchedProduct.setName("HyperX Fury DDR4-3600 65536MB");
+        System.out.println(searchedProduct);
+        System.out.println(productService.get(PRESENT_PRODUCT));
+        System.out.println(productService.get(ABSENT_PRODUCT));
     }
 }

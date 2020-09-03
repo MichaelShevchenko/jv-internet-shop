@@ -1,15 +1,13 @@
 package com.internet.shop.model;
 
-import java.math.BigDecimal;
-
 public class Product implements Cloneable {
     private Long id;
     private String name;
-    private BigDecimal price;
+    private Double price;
 
     public Product(String name, double price) {
         this.name = name;
-        this.price = BigDecimal.valueOf(price);
+        this.price = price;
     }
 
     public void setId(Long id) {
@@ -20,7 +18,7 @@ public class Product implements Cloneable {
         this.name = name;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -32,7 +30,7 @@ public class Product implements Cloneable {
         return name;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 

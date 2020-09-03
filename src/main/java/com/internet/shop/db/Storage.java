@@ -12,8 +12,4 @@ public class Storage {
         newProduct.setId(++productId);
         products.add(newProduct);
     }
-
-    public static boolean removeProduct(Product product) {
-        return products.removeIf(p -> product.getId().equals(p.getId()));
-    }
 }
