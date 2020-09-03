@@ -4,11 +4,14 @@ import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
 
+import java.util.List;
+
 public class Application {
     private static Injector injector = Injector.getInstance("com.internet.shop");
     private static final double NEW_PRICE = 1500;
     private static final long PRESENT_PRODUCT = 4L;
     private static final long ABSENT_PRODUCT = 7L;
+    private static final long TO_DELETE = 3L;
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
@@ -21,7 +24,7 @@ public class Application {
         productService.create(cpu);
         productService.create(motherboard);
         productService.create(cooler);
-        productService.delete((long) 3);
+        productService.delete(TO_DELETE);
         productService.create(ram);
         System.out.println(productService.getAll().toString());
 
@@ -37,5 +40,10 @@ public class Application {
         System.out.println(searchedProduct);
         System.out.println(productService.get(PRESENT_PRODUCT));
         System.out.println(productService.get(ABSENT_PRODUCT));
+
+        List<Product> copiedStorage = productService.getAll();
+        copiedStorage.add(cooler);
+        System.out.println(copiedStorage);
+        System.out.println(productService.getAll());
     }
 }
