@@ -27,11 +27,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        return IntStream.range(0, Storage.products.size())
+        IntStream.range(0, Storage.products.size())
                 .filter(i -> Storage.products.get(i).getId().equals(product.getId()))
                 .mapToObj(i -> Storage.products.set(i, product))
                 .findFirst()
                 .orElseThrow();
+        return product;
     }
 
     @Override
