@@ -14,7 +14,6 @@ public class Application {
         Product cpu = new Product("i9-10900K", 650);
         Product motherboard = new Product("MSI Z490 GODLIKE", 900);
         Product ram = new Product("HyperX DDR4-3600 65536MB", 400);
-        Product gpu = new Product("GeForce RTX 2080Ti", 1150);
         Product cooler = new Product("MSI Core Frozr XL", 150);
 
         productService.create(cpu);
@@ -24,12 +23,14 @@ public class Application {
         productService.create(ram);
         System.out.println(productService.getAll().toString());
 
+        Product gpu = new Product("GeForce RTX 2080Ti", 1150);
         productService.create(gpu);
         Product gpuToUpdate = gpu.clone();
-        gpuToUpdate.setPrice(BigDecimal.valueOf((long) 1500));
+        gpuToUpdate.setPrice(BigDecimal.valueOf(1500));
         productService.update(gpuToUpdate);
         System.out.println(productService.getAll());
 
+        System.out.println(productService.get((long) 4));
         System.out.println(productService.get((long) 7));
     }
 }

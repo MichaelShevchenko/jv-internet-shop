@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static Long productId = 0L;
     public static final List<Product> products = new ArrayList<>();
+    private static Long productId = 0L;
 
     public static void addProduct(Product newProduct) {
         newProduct.setId(++productId);
