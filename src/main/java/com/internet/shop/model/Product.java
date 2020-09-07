@@ -42,7 +42,7 @@ public class Product implements Cloneable {
 
     @Override
     public Product clone() {
-        Product productCopy = new Product(name, price.doubleValue());
+        Product productCopy = new Product(name, price);
         productCopy.setId(id);
         return productCopy;
     }

@@ -1,7 +1,6 @@
 package com.internet.shop.service;
 
 import com.internet.shop.dao.ProductDao;
-import com.internet.shop.dao.ProductDaoImpl;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
@@ -10,7 +9,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     @Inject
-    private ProductDao productDao = new ProductDaoImpl();
+    private ProductDao productDao;
 
     @Override
     public Product create(Product product) {
