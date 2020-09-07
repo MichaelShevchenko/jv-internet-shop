@@ -1,14 +1,12 @@
 package com.internet.shop.service;
 
 import com.internet.shop.dao.OrderDao;
-import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
