@@ -18,6 +18,8 @@ public class Application {
     private static final long PRESENT_PRODUCT = 4L;
     private static final long PRESENT_USER = 2L;
     private static final long SECOND_PRESENT_USER = 3L;
+    private static final long ORDER_PRESENT_USER = 4L;
+    private static final long ORDER_SECOND_PRESENT_USER = 5L;
     private static final long PRESENT_ORDER = 3L;
     private static final long PRODUCT_TO_DELETE = 3L;
     private static final long USER_TO_DELETE = 1L;
@@ -112,21 +114,24 @@ public class Application {
         shoppingCartService.create(buyerShoppingCart);
         shoppingCartService.create(explorerShoppingCart);
         System.out.println(shoppingCartService.getByUserId(PRESENT_USER));
-        shoppingCartService.addProduct(buyerShoppingCart, cooler);
-        shoppingCartService.addProduct(buyerShoppingCart, motherboard);
-        shoppingCartService.addProduct(explorerShoppingCart, cpu);
-        shoppingCartService.addProduct(explorerShoppingCart, gpu);
-        shoppingCartService.deleteProduct(explorerShoppingCart, gpu);
-        shoppingCartService.addProduct(explorerShoppingCart, ram);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(PRESENT_USER), cooler);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(PRESENT_USER), motherboard);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(SECOND_PRESENT_USER), cpu);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(SECOND_PRESENT_USER), gpu);
+        shoppingCartService.deleteProduct(shoppingCartService
+                .getByUserId(SECOND_PRESENT_USER), gpu);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(SECOND_PRESENT_USER), ram);
         System.out.println(shoppingCartService.getByUserId(PRESENT_USER));
         System.out.println(shoppingCartService.getByUserId(SECOND_PRESENT_USER));
         System.out.println(Storage.shoppingCarts);
+
+        explorerShoppingCart = shoppingCartService.getByUserId(SECOND_PRESENT_USER);
         shoppingCartService.clear(explorerShoppingCart);
         System.out.println(Storage.shoppingCarts);
         shoppingCartService.delete(explorerShoppingCart);
         System.out.println(Storage.shoppingCarts);
         ShoppingCart shoppingCartCopy = shoppingCartService.getByUserId(PRESENT_USER);
-        shoppingCartCopy.setUserID(3L);
+        shoppingCartCopy.setUserId(3L);
         System.out.println(shoppingCartCopy);
         System.out.println(Storage.shoppingCarts);
     }
@@ -145,31 +150,39 @@ public class Application {
         productService.create(cooler);
         productService.create(ram);
 
-        ShoppingCart buyerShoppingCart = new ShoppingCart(PRESENT_USER);
-        ShoppingCart explorerShoppingCart = new ShoppingCart(SECOND_PRESENT_USER);
+        ShoppingCart buyerShoppingCart = new ShoppingCart(ORDER_PRESENT_USER);
+        ShoppingCart explorerShoppingCart = new ShoppingCart(ORDER_SECOND_PRESENT_USER);
         shoppingCartService.create(buyerShoppingCart);
         shoppingCartService.create(explorerShoppingCart);
-        shoppingCartService.addProduct(buyerShoppingCart, cooler);
-        shoppingCartService.addProduct(buyerShoppingCart, motherboard);
-        shoppingCartService.addProduct(explorerShoppingCart, cpu);
-        shoppingCartService.addProduct(explorerShoppingCart, gpu);
-        shoppingCartService.addProduct(explorerShoppingCart, ram);
-        System.out.println(shoppingCartService.getByUserId(PRESENT_USER));
-        System.out.println(shoppingCartService.getByUserId(SECOND_PRESENT_USER));
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(ORDER_PRESENT_USER), cooler);
+        shoppingCartService.addProduct(shoppingCartService
+                .getByUserId(ORDER_PRESENT_USER), motherboard);
+        shoppingCartService.addProduct(shoppingCartService
+                .getByUserId(ORDER_SECOND_PRESENT_USER), cpu);
+        shoppingCartService.addProduct(shoppingCartService
+                .getByUserId(ORDER_SECOND_PRESENT_USER), gpu);
+        shoppingCartService.addProduct(shoppingCartService
+                .getByUserId(ORDER_SECOND_PRESENT_USER), ram);
+        System.out.println(shoppingCartService.getByUserId(ORDER_PRESENT_USER));
+        System.out.println(shoppingCartService.getByUserId(ORDER_SECOND_PRESENT_USER));
         System.out.println(Storage.shoppingCarts);
 
+        buyerShoppingCart = shoppingCartService.getByUserId(ORDER_PRESENT_USER);
+        explorerShoppingCart = shoppingCartService.getByUserId(ORDER_SECOND_PRESENT_USER);
         orderService.completeOrder(buyerShoppingCart);
         orderService.completeOrder(explorerShoppingCart);
         System.out.println(orderService.getAll());
         orderService.delete(ORDER_TO_DELETE);
         System.out.println(orderService.getAll());
         System.out.println(Storage.shoppingCarts);
-        ShoppingCart secondUserAnotherPurchase = new ShoppingCart(PRESENT_USER);
+
+        ShoppingCart secondUserAnotherPurchase = new ShoppingCart(ORDER_PRESENT_USER);
         shoppingCartService.create(secondUserAnotherPurchase);
-        shoppingCartService.addProduct(secondUserAnotherPurchase, ram);
-        shoppingCartService.addProduct(secondUserAnotherPurchase, cpu);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(ORDER_PRESENT_USER), ram);
+        shoppingCartService.addProduct(shoppingCartService.getByUserId(ORDER_PRESENT_USER), cpu);
+        secondUserAnotherPurchase = shoppingCartService.getByUserId(ORDER_PRESENT_USER);
         orderService.completeOrder(secondUserAnotherPurchase);
-        System.out.println(orderService.getUserOrders(PRESENT_USER));
+        System.out.println(orderService.getUserOrders(ORDER_PRESENT_USER));
         System.out.println(orderService.get(PRESENT_ORDER));
     }
 }

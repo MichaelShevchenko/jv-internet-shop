@@ -6,15 +6,15 @@ import java.util.List;
 public class Order implements Cloneable {
     private Long id;
     private List<Product> products;
-    private Long userID;
+    private Long userId;
 
-    public Order(Long userID) {
-        this.userID = userID;
+    public Order(Long userId) {
+        this.userId = userId;
         this.products = new ArrayList<>();
     }
 
-    public Order(Long userID, List<Product> products) {
-        this.userID = userID;
+    public Order(Long userId, List<Product> products) {
+        this.userId = userId;
         this.products = copyProducts(products);
     }
 
@@ -34,22 +34,22 @@ public class Order implements Cloneable {
         this.products = products;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
-        return "Order{" + "id=" + id + ", products=" + products + ", userID=" + userID + '}';
+        return "Order{" + "id=" + id + ", products=" + products + ", userID=" + userId + '}';
     }
 
     @Override
     public Order clone() {
-        Order orderCopy = new Order(userID, copyProducts(products));
+        Order orderCopy = new Order(userId, copyProducts(products));
         orderCopy.setId(id);
         return orderCopy;
     }

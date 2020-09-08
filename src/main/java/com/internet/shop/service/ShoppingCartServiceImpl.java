@@ -19,36 +19,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
-        List<Product> productsInCart = shoppingCartDao
-                                        .getByUserId(shoppingCart.getUserID()).get().getProducts();
+        List<Product> productsInCart = shoppingCart.getProducts();
         productsInCart.add(product);
-        ShoppingCart updated = new ShoppingCart(shoppingCart.getUserID(), productsInCart);
-        updated.setId(shoppingCart.getId());
-        return shoppingCartDao.update(updated);
+        shoppingCart.setProducts(productsInCart);
+        return shoppingCartDao.update(shoppingCart);
     }
 
     @Override
     public boolean deleteProduct(ShoppingCart shoppingCart, Product product) {
-        List<Product> productsInCart = shoppingCartDao
-                                        .getByUserId(shoppingCart.getUserID()).get().getProducts();
-        if (productsInCart.size() < 1) {
-            return false;
-        }
+        List<Product> productsInCart = shoppingCart.getProducts();
         boolean result = productsInCart.removeIf(p -> p.getId().equals(product.getId()));
-        ShoppingCart updated = new ShoppingCart(shoppingCart.getUserID(), productsInCart);
-        updated.setId(shoppingCart.getId());
-        shoppingCartDao.update(updated);
+        shoppingCart.setProducts(productsInCart);
+        shoppingCartDao.update(shoppingCart);
         return result;
     }
 
     @Override
     public void clear(ShoppingCart shoppingCart) {
-        List<Product> productsInCart = shoppingCartDao
-                                        .getByUserId(shoppingCart.getUserID()).get().getProducts();
+        List<Product> productsInCart = shoppingCart.getProducts();
         productsInCart.clear();
-        ShoppingCart updated = new ShoppingCart(shoppingCart.getUserID(), productsInCart);
-        updated.setId(shoppingCart.getId());
-        shoppingCartDao.update(updated);
+        shoppingCart.setProducts(productsInCart);
+        shoppingCartDao.update(shoppingCart);
     }
 
     @Override
