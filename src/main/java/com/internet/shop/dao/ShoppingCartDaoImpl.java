@@ -29,9 +29,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     public ShoppingCart update(ShoppingCart shoppingCart) {
         IntStream.range(0, Storage.shoppingCarts.size())
                 .filter(i -> Storage.shoppingCarts.get(i).getId().equals(shoppingCart.getId()))
-                .mapToObj(i -> Storage.shoppingCarts.set(i, shoppingCart))
-                .findFirst()
-                .orElseThrow();
+                .forEach(i -> Storage.shoppingCarts.set(i, shoppingCart));
         return shoppingCart;
     }
 

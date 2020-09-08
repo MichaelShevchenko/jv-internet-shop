@@ -28,9 +28,7 @@ public class OrderDaoImpl implements OrderDao {
     public Order update(Order order) {
         IntStream.range(0, Storage.orders.size())
                 .filter(i -> Storage.orders.get(i).getId().equals(order.getId()))
-                .mapToObj(i -> Storage.orders.set(i, order))
-                .findFirst()
-                .orElseThrow();
+                .forEach(i -> Storage.orders.set(i, order));
         return order;
     }
 

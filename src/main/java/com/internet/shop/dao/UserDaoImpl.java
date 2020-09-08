@@ -28,9 +28,7 @@ public class UserDaoImpl implements UserDao {
     public User update(User user) {
         IntStream.range(0, Storage.users.size())
                 .filter(i -> Storage.users.get(i).getId().equals(user.getId()))
-                .mapToObj(i -> Storage.users.set(i, user))
-                .findFirst()
-                .orElseThrow();
+                .forEach(i -> Storage.users.set(i, user));
         return user;
     }
 
