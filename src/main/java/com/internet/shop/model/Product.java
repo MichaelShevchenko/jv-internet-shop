@@ -48,14 +48,18 @@ public class Product implements Cloneable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
 
-        Product product = (Product) o;
-
-        if (!id.equals(product.id)) return false;
-        if (!name.equals(product.name)) return false;
+        Product product = (Product) other;
+        if (!id.equals(product.id) || !name.equals(product.name)) {
+            return false;
+        }
         return price.equals(product.price);
     }
 
