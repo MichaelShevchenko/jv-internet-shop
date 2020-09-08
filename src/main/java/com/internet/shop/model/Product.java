@@ -42,8 +42,32 @@ public class Product implements Cloneable {
 
     @Override
     public Product clone() {
-        Product productCopy = new Product(name, price.doubleValue());
+        Product productCopy = new Product(name, price);
         productCopy.setId(id);
         return productCopy;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Product product = (Product) other;
+        if (!id.equals(product.id) || !name.equals(product.name)) {
+            return false;
+        }
+        return price.equals(product.price);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + price.hashCode();
+        return result;
     }
 }
