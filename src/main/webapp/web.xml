@@ -93,4 +93,84 @@
         <servlet-name>addToCart</servlet-name>
         <url-pattern>/shopping-carts/products/add</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>removeFromCart</servlet-name>
+        <servlet-class>com.internet.shop.controllers.cart.RemoveProductFromCartController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>removeFromCart</servlet-name>
+        <url-pattern>/shopping-carts/products/remove</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>manageProducts</servlet-name>
+        <servlet-class>com.internet.shop.controllers.product.ManageProductsController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>manageProducts</servlet-name>
+        <url-pattern>/products/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteProduct</servlet-name>
+        <servlet-class>com.internet.shop.controllers.product.DeleteProductController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteProduct</servlet-name>
+        <url-pattern>/products/edit/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>confirmOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.order.ConfirmOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>confirmOrder</servlet-name>
+        <url-pattern>/shopping-carts/products/confirm-order</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>usersOrdersHistory</servlet-name>
+        <servlet-class>com.internet.shop.controllers.order.GetUsersOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>usersOrdersHistory</servlet-name>
+        <url-pattern>/orders/history</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>orderDetails</servlet-name>
+        <servlet-class>com.internet.shop.controllers.order.ProductsInOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>orderDetails</servlet-name>
+        <url-pattern>/orders/details</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>com.internet.shop.controllers.order.DeleteOrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/orders/edit/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>manageOrders</servlet-name>
+        <servlet-class>com.internet.shop.controllers.order.ManageOrdersController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>manageOrders</servlet-name>
+        <url-pattern>/orders/edit</url-pattern>
+    </servlet-mapping>
 </web-app>
