@@ -5,5 +5,7 @@
 </head>
 <body>
 <h1>Hello world!</h1>
+
+<a href="${pageContext.request.contextPath}/inject-data">Injecting test data in to DB</a>
 </body>
 </html>
