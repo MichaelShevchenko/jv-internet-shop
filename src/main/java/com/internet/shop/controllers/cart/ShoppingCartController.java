@@ -20,7 +20,6 @@ public class ShoppingCartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         List<Product> addedProducts = shoppingCartService.getByUserId(USER_ID).getProducts();
-
         req.setAttribute("productsInCart", addedProducts);
         req.getRequestDispatcher("/WEB-INF/views/shopping-carts/products.jsp").forward(req, resp);
     }

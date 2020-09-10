@@ -21,7 +21,7 @@
 
     <servlet-mapping>
         <servlet-name>injectData</servlet-name>
-        <url-pattern>/injectData</url-pattern>
+        <url-pattern>/inject-data</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -86,7 +86,7 @@
 
     <servlet>
         <servlet-name>addToCart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.cart.AddToCartController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.cart.AddProductToCartController</servlet-class>
     </servlet>
 
     <servlet-mapping>
