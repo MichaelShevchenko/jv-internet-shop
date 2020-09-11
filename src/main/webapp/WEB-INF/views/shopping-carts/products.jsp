@@ -32,6 +32,6 @@
     </c:forEach>
 </table>
 <a href="${pageContext.request.contextPath}/products/all">Go to products catalog</a>
-<a href="${pageContext.request.contextPath}/shopping-carts/products/confirm-order">Confirm order</a>
+<a href="${pageContext.request.contextPath}/orders/complete">Confirm order</a>
 </body>
 </html>
