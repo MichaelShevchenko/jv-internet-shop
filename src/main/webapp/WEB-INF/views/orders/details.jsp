@@ -2,11 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Checkout</title>
+    <title>Order details</title>
 </head>
 <body>
-<h1>Welcome to checkout page</h1>
-<h1>Admin products page</h1>
+<h1>Welcome to order details page</h1>
 
 <table border="1">
     <tr>

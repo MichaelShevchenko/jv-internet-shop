@@ -20,7 +20,14 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        orderService.completeOrder(shoppingCartService.getByUserId(USER_ID));
-        resp.sendRedirect(req.getContextPath() + "/orders/history");
+        if (shoppingCartService.getByUserId(USER_ID).getProducts().size() == 0) {
+            req.setAttribute("message", "There are no products in your shopping cart."
+                    + "Please, choose a product you would like to purchase to be able to proceed");
+            req.getRequestDispatcher("/WEB-INF/views/shopping-carts/products.jsp")
+                    .forward(req, resp);
+        } else {
+            orderService.completeOrder(shoppingCartService.getByUserId(USER_ID));
+            resp.sendRedirect(req.getContextPath() + "/orders/history");
+        }
     }
 }

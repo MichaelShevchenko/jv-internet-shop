@@ -26,5 +26,7 @@
         </td>
     </tr>
     </c:forEach>
+</table>
+<a href="${pageContext.request.contextPath}/products/all">Go to products catalog</a>
 </body>
 </html>

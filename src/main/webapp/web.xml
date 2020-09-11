@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>allUsers</servlet-name>
-        <servlet-class>com.internet.shop.controllers.user.UsersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.user.GetAllUsersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -56,7 +56,7 @@
 
     <servlet>
         <servlet-name>allProducts</servlet-name>
-        <servlet-class>com.internet.shop.controllers.product.ProductsController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.product.GetAllProductsController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>UsersShoppingCart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.cart.ShoppingCartController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.cart.GetProductsInCartController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -146,7 +146,7 @@
 
     <servlet>
         <servlet-name>orderDetails</servlet-name>
-        <servlet-class>com.internet.shop.controllers.order.ProductsInOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.order.GetOrdersDetailsController</servlet-class>
     </servlet>
 
     <servlet-mapping>

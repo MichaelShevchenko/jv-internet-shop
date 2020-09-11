@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>Shopping cart page</h1>
+<h4 style="color: red">${message}</h4>
 
 <table border="1">
     <tr>
