@@ -1,6 +1,7 @@
 package com.internet.shop.web.filters;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -29,6 +30,12 @@ public class AuthenticationFilter implements Filter {
         }
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
         if (userId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+        try {
+            userService.get(userId);
+        } catch (NoSuchElementException message) {
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }

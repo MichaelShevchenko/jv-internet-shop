@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ConfirmOrderController extends HttpServlet {
-    private static final Long USER_ID = 1L;
+    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final OrderService orderService = (OrderService) injector
             .getInstance(OrderService.class);
@@ -20,13 +20,14 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if (shoppingCartService.getByUserId(USER_ID).getProducts().size() == 0) {
+        Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        if (shoppingCartService.getByUserId(userId).getProducts().size() == 0) {
             req.setAttribute("message", "There are no products in your shopping cart."
                     + "Please, choose a product you would like to purchase to be able to proceed");
             req.getRequestDispatcher("/WEB-INF/views/shopping-carts/products.jsp")
                     .forward(req, resp);
         } else {
-            orderService.completeOrder(shoppingCartService.getByUserId(USER_ID));
+            orderService.completeOrder(shoppingCartService.getByUserId(userId));
             resp.sendRedirect(req.getContextPath() + "/orders/history");
         }
     }
