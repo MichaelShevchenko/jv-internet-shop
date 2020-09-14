@@ -8,7 +8,7 @@
 <h1>Login page</h1>
 <h4 style="color: red">${errorMessage}</h4>
 
-<form method="post" action="${pageContext.request.contextPath}/users/login">
+<form method="post" action="${pageContext.request.contextPath}/login">
     Please, provide your login: <input type="text" name="login" required="*"><p>
     Please, repeat your password to confirm it: <input type="password" name="pwd" required="*">
 
@@ -16,6 +16,6 @@
 </form>
 
 <c:out value="New in our shop?" /> &emsp;
-<a href="${pageContext.request.contextPath}/users/registration">Register!</a>
+<a href="${pageContext.request.contextPath}/registration">Register!</a>
 </body>
 </html>

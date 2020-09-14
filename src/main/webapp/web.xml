@@ -52,7 +52,7 @@
 
     <servlet-mapping>
         <servlet-name>loginUser</servlet-name>
-        <url-pattern>/users/login</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -82,7 +82,7 @@
 
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
-        <url-pattern>/users/registration</url-pattern>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
     <servlet>

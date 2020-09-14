@@ -8,7 +8,7 @@
 
 <h4 style="color: red">${message}</h4>
 
-<form method="post" action="${pageContext.request.contextPath}/users/registration">
+<form method="post" action="${pageContext.request.contextPath}/registration">
     Please, provide your login: <input type="text" name="login" required="*"><p>
     Please, provide your name: <input type="text" name="name" required="*"><p>
     Please, provide your password: <input type="password" name="pwd" required="*"><p>
