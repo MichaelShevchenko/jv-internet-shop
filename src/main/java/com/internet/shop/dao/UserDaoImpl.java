@@ -43,4 +43,12 @@ public class UserDaoImpl implements UserDao {
                 .map(User::clone)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        return Storage.users.stream()
+                .filter(u -> u.getLogin().equals(login))
+                .map(User::clone)
+                .findFirst();
+    }
 }

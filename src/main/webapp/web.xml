@@ -4,6 +4,27 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <display-name>log4j-application</display-name>
+
+    <context-param>
+        <param-name>log4j-config-location</param-name>
+        <param-value>WEB-INF/log4j.properties</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.internet.shop.lib.ContextListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>com.internet.shop.web.filters.AuthenticationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>index</servlet-name>
         <servlet-class>com.internet.shop.controllers.IndexController</servlet-class>
@@ -22,6 +43,16 @@
     <servlet-mapping>
         <servlet-name>injectData</servlet-name>
         <url-pattern>/inject-data</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>loginUser</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.LoginController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>loginUser</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -51,7 +82,7 @@
 
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
-        <url-pattern>/users/registration</url-pattern>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
     <servlet>
