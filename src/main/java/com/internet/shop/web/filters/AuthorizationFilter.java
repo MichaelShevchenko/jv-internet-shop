@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthorizationFilter implements Filter {
     private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private final Map<String, List<Role.RoleName>> protectedUrls = new HashMap<>();
     private final UserService userService = (UserService) injector.getInstance(UserService.class);
+    private final Map<String, List<Role.RoleName>> protectedUrls = new HashMap<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

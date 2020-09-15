@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthenticationFilter implements Filter {
     private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private final Set<String> accessibleUrls = new HashSet<>();
     private final UserService userService = (UserService) injector.getInstance(UserService.class);
+    private final Set<String> accessibleUrls = new HashSet<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
