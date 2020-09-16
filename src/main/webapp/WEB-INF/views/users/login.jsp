@@ -15,7 +15,7 @@
     <button type="submit">Login</button>
 </form>
 
-<c:out value="New in our shop?" /> &emsp;
+<c:out value="New at our shop?" /> &emsp;
 <a href="${pageContext.request.contextPath}/registration">Register!</a>
 </body>
 </html>

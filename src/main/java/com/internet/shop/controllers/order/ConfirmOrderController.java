@@ -1,5 +1,6 @@
 package com.internet.shop.controllers.order;
 
+import com.internet.shop.controllers.user.LoginController;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.OrderService;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ConfirmOrderController extends HttpServlet {
-    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final OrderService orderService = (OrderService) injector
             .getInstance(OrderService.class);
@@ -21,7 +21,7 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long userId = (Long) req.getSession().getAttribute(USER_ID);
+        Long userId = (Long) req.getSession().getAttribute(LoginController.USER_ID);
         ShoppingCart usersCart = shoppingCartService.getByUserId(userId);
         if (usersCart.getProducts().size() == 0) {
             req.setAttribute("message", "There are no products in your shopping cart."
