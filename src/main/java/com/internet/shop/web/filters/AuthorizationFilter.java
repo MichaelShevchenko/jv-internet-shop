@@ -1,5 +1,6 @@
 package com.internet.shop.web.filters;
 
+import com.internet.shop.controllers.user.LoginController;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
@@ -18,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AuthorizationFilter implements Filter {
-    private static final String USER_ID = "user_id";
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final UserService userService = (UserService) injector.getInstance(UserService.class);
     private final Map<String, List<Role.RoleName>> protectedUrls = new HashMap<>();
@@ -45,19 +45,13 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String requestedUrl = req.getServletPath();
-        List<Role.RoleName> allowedRoles = protectedUrls.get(requestedUrl);
-        if (allowedRoles == null) {
-            chain.doFilter(req, resp);
-            return;
-        }
-        Long userId = (Long) req.getSession().getAttribute(USER_ID);
-        User user = userService.get(userId);
-        if (isAuthorized(user, allowedRoles)) {
+        Long userId = (Long) req.getSession().getAttribute(LoginController.USER_ID);
+        if (!protectedUrls.containsKey(requestedUrl)
+                || isAuthorized(userService.get(userId), protectedUrls.get(requestedUrl))) {
             chain.doFilter(req, resp);
         } else {
             req.getRequestDispatcher("/WEB-INF/views/accessDenied.jsp").forward(req, resp);
         }
-
     }
 
     @Override
