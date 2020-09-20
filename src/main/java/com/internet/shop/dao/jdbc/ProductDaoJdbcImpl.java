@@ -1,7 +1,7 @@
 package com.internet.shop.dao.jdbc;
 
 import com.internet.shop.dao.ProductDao;
-import com.internet.shop.exceptions.DataBaseException;
+import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product item) {
-        String query = "INSERT INTO products (name, price) VALUES (?, ?)";
+        String query = "INSERT INTO products (product_name, price) VALUES (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection
                                         .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -31,13 +31,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return item;
         } catch (SQLException message) {
-            throw new DataBaseException("Couldn't create provided product: " + item, message);
+            throw new DataProcessingException("Couldn't create provided product: " + item, message);
         }
     }
 
     @Override
     public Optional<Product> get(Long itemId) {
-        String query = "SELECT * FROM products WHERE id = ? AND deleted = 0";
+        String query = "SELECT * FROM products WHERE product_id = ? AND deleted = 0";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, itemId);
@@ -47,13 +47,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return Optional.empty();
         } catch (SQLException message) {
-            throw new DataBaseException("Couldn't get product by specified id: " + itemId, message);
+            throw new DataProcessingException("Couldn't get product by specified id: "
+                                                                    + itemId, message);
         }
     }
 
     @Override
     public Product update(Product item) {
-        String query = "UPDATE products SET name = ?, price = ? WHERE id = ?";
+        String query = "UPDATE products SET product_name = ?, price = ? WHERE product_id = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, item.getName());
@@ -62,19 +63,19 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.executeUpdate();
             return item;
         } catch (SQLException message) {
-            throw new DataBaseException("Couldn't update provided product: " + item, message);
+            throw new DataProcessingException("Couldn't update provided product: " + item, message);
         }
     }
 
     @Override
     public boolean deleteById(Long itemId) {
-        String query = "UPDATE products SET deleted = 1 WHERE id = ?";
+        String query = "UPDATE products SET deleted = 1 WHERE product_id = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, itemId);
             return statement.executeUpdate() == 1;
         } catch (SQLException message) {
-            throw new DataBaseException("Couldn't delete product by specified id: "
+            throw new DataProcessingException("Couldn't delete product by specified id: "
                                                                 + itemId, message);
         }
     }
@@ -91,13 +92,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return allProducts;
         } catch (SQLException message) {
-            throw new DataBaseException("Couldn't get products from DataBase", message);
+            throw new DataProcessingException("Couldn't get products from DataBase", message);
         }
     }
 
     private Product composeExtractedProduct(ResultSet resultSet) throws SQLException {
-        long id = resultSet.getLong("id");
-        String name = resultSet.getString("name");
+        long id = resultSet.getLong("product_id");
+        String name = resultSet.getString("product_name");
         double price = resultSet.getDouble("price");
         Product newProduct = new Product(name, price);
         newProduct.setId(id);
