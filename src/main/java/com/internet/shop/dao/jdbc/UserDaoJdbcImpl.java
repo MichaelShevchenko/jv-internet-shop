@@ -58,6 +58,7 @@ public class UserDaoJdbcImpl implements UserDao {
             throw new DataProcessingException("Couldn't create provided user: " + user, e);
         }
         addRoles(user.getRoles(), user.getId());
+        user.setRoles(composeRoleSetByUserId(user.getId()));
         return user;
     }
 
