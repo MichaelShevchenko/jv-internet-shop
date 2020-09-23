@@ -1,6 +1,7 @@
 package com.internet.shop;
 
 import com.internet.shop.dao.ProductDao;
+import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.dao.UserDao;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Role;
@@ -13,10 +14,11 @@ public class Application {
     public static void main(String[] args) {
         ProductDao productDaoJdbc = (ProductDao) injector.getInstance(ProductDao.class);
         UserDao userDaoJdbc = (UserDao) injector.getInstance(UserDao.class);
+        ShoppingCartDao shoppingCartDao = (ShoppingCartDao) injector.getInstance(ShoppingCartDao.class);
         System.out.println(productDaoJdbc.getAll());
         User toTest = userDaoJdbc.get(13L).get();
         System.out.println(toTest);
-        toTest.setRoles(Set.of(Role.of("USER")));
+        toTest.setRoles(Set.of(Role.of("ADMIN")));
         Set<Role> res = toTest.getRoles();
         for (Role role : res) {
             if (role.getRoleName().equals(Role.RoleName.ADMIN)) {
@@ -30,5 +32,6 @@ public class Application {
         System.out.println(userDaoJdbc.get(13L).get());
         System.out.println(userDaoJdbc.findByLogin("Diagram"));
         System.out.println(userDaoJdbc.getAll());
+        System.out.println(shoppingCartDao.getAll());
     }
 }

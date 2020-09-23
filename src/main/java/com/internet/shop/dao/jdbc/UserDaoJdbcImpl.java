@@ -57,7 +57,7 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Couldn't create provided user: " + user, e);
         }
-        setRolesIdAndAddRoles(user.getRoles(), user.getId());
+        addRoles(user.getRoles(), user.getId());
         return user;
     }
 
@@ -85,7 +85,7 @@ public class UserDaoJdbcImpl implements UserDao {
         String query = "UPDATE users SET user_name = ?, login = ?, password = ? "
                 + "WHERE user_id = ? AND deleted = FALSE";
         deleteRoles(user.getId());
-        setRolesIdAndAddRoles(user.getRoles(), user.getId());
+        addRoles(user.getRoles(), user.getId());
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getName());
@@ -164,7 +164,7 @@ public class UserDaoJdbcImpl implements UserDao {
         }
     }
 
-    private void setRolesIdAndAddRoles(Set<Role> roleSet, long userId) {
+    private void addRoles(Set<Role> roleSet, long userId) {
         String query = "INSERT INTO users_roles (user_id, role_id) "
                 + "VALUES (?, (SELECT role_id FROM roles WHERE role_name = ? AND deleted = FALSE))";
         try (Connection connection = ConnectionUtil.getConnection()) {
