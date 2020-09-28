@@ -8,7 +8,7 @@ import com.internet.shop.model.User;
 import java.util.Set;
 
 public class Application {
-    private static Injector injector = Injector.getInstance("com.internet.shop");
+    private static final Injector injector = Injector.getInstance("com.internet.shop");
 
     public static void main(String[] args) {
         ProductDao productDaoJdbc = (ProductDao) injector.getInstance(ProductDao.class);

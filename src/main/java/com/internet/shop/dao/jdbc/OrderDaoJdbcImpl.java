@@ -87,7 +87,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public boolean deleteById(Long orderId) {
         String query = "UPDATE orders SET deleted = TRUE WHERE order_id = ? AND deleted = FALSE";
-        deleteProducts(orderId);
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, orderId);
