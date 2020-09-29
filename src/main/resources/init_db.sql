@@ -16,6 +16,7 @@ CREATE TABLE `internet_shop`.`users` (
                                          `user_name` VARCHAR(225) NOT NULL,
                                          `login` VARCHAR(225) NOT NULL,
                                          `password` VARCHAR(225) NOT NULL,
+                                         `salt` VARBINARY(1024) NOT NULL,
                                          `deleted` TINYINT(1) NOT NULL DEFAULT 0,
                                          PRIMARY KEY (`user_id`),
                                          UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE);
