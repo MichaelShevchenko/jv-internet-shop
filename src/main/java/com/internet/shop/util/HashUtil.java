@@ -1,6 +1,6 @@
 package com.internet.shop.util;
 
-import com.internet.shop.exceptions.UnsecuredPasswordStoring;
+import com.internet.shop.exceptions.UnsecuredPasswordStoringException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -26,7 +26,7 @@ public class HashUtil {
             }
             return hashedPassword.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new UnsecuredPasswordStoring("Password hashing failed! ", e);
+            throw new UnsecuredPasswordStoringException("Password hashing failed! ", e);
         }
     }
 }
