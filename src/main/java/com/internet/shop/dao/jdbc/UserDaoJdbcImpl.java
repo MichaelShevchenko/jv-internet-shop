@@ -42,13 +42,14 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        String query = "INSERT INTO users (user_name, login, password) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (user_name, login, password, salt) VALUES (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection
                     .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
+            statement.setBytes(4, user.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -83,7 +84,7 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User user) {
-        String query = "UPDATE users SET user_name = ?, login = ?, password = ? "
+        String query = "UPDATE users SET user_name = ?, login = ?, password = ?, salt = ? "
                 + "WHERE user_id = ? AND deleted = FALSE";
         deleteRoles(user.getId());
         addRoles(user.getRoles(), user.getId());
@@ -92,7 +93,8 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(1, user.getName());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
-            statement.setLong(4, user.getId());
+            statement.setBytes(4, user.getSalt());
+            statement.setLong(5, user.getId());
             statement.executeUpdate();
             return user;
         } catch (SQLException e) {
@@ -137,9 +139,11 @@ public class UserDaoJdbcImpl implements UserDao {
         long id = resultSet.getLong("user_id");
         String name = resultSet.getString("user_name");
         String login = resultSet.getString("login");
+        byte[] salt = resultSet.getBytes("salt");
         String password = resultSet.getString("password");
         User newUser = new User(name, login, password);
         newUser.setId(id);
+        newUser.setSalt(salt);
         return newUser;
     }
 
