@@ -105,7 +105,6 @@ public class UserDaoJdbcImpl implements UserDao {
     @Override
     public boolean deleteById(Long userId) {
         String query = "UPDATE users SET deleted = TRUE WHERE user_id = ? AND deleted = FALSE";
-        deleteRoles(userId);
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, userId);
