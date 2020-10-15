@@ -7,4 +7,3 @@ To set up the project, so you could start it locally, please follow next steps:
     GRANT ALL<br>
       &emsp; ON internet_shop.*<br>
       &emsp; TO 'admin'@'localhost';
-* Have Fun!
