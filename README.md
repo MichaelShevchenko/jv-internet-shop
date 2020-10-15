@@ -24,7 +24,7 @@ in the DB please run following queries in your RDBMS:<br>
       &emsp; TO 'admin'@'localhost';
 * after registration and logging in as the new user please, use "Injecting test data in to DB" link to insert 
 some test data as well as the admin user. After this procedure you may login as Admin using "admin" as login and 
-"matestudent" password or as SuperAdmin using "SuperUser" for login and "matestudent" for password. 
+"matestudent" as password or as SuperAdmin using "SuperUser" for login and "matestudent" for password. 
 The difference between these two users is that Admin only have admin privileges (which is creating, 
 overviewing and editing content), so he can't make orders, either he doesn't have shopping cart, while SuperAdmin 
 have both (admin and user). 
