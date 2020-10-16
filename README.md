@@ -17,11 +17,13 @@ To set up the project, so you could start it locally, please follow next steps:
 * run sql queries provided in src/main/resources/init_db.sql in your RDBMS to create local DB for the project
 * to create user for the DB schema and configure his access rights, so the application could produce changes 
 in the DB please run following queries in your RDBMS:<br>
-    ```CREATE USER 'admin'@'localhost'
+    ```SQL
+    CREATE USER 'admin'@'localhost'
         IDENTIFIED BY 'matestudent';
     GRANT ALL
         ON internet_shop.*
-        TO 'admin'@'localhost';```
+        TO 'admin'@'localhost';
+     ```
 * after registration and logging in as the new user please, use "Injecting test data in to DB" link to insert 
 some test data as well as the admin user. After this procedure you may login as Admin using "admin" as login and 
 "matestudent" as password or as SuperAdmin using "SuperUser" for login and "matestudent" for password. 
